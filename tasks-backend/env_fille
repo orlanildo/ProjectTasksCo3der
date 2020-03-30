@@ -1,0 +1,6 @@
+// Altere o nome do arquivo para .end
+// Crie a sua Hash em authSecret: '' 
+
+module.exports = {
+    authSecret: ''
+}
