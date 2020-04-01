@@ -15,6 +15,16 @@ export default class AddTasks extends Component {
         ...initialState
     }
 
+    save= () => {
+        const newTask = {
+            desc: this.state.desc,
+            date: this.state.date
+        }
+
+        this.props.onSave && this.props.onSave(newTask)
+        this.setState({ ...initialState })
+    }
+
     getDatePicker = () => {
         let datePicker = <DateTimePicker value={this.state.date}
             onChange={(_, date) => this.setState({ date, showDatePicker: false })} mode='date' />
@@ -46,7 +56,7 @@ export default class AddTasks extends Component {
 
                 <View style={styles.container}>
                     <Text style={styles.header}>Nova Tarefa</Text>
-                    <TextInput style={styles.input} placeholder="  Informe a descrição..."
+                    <TextInput style={styles.input} placeholder=" Informe a descrição..."
                         onChangeText={desc => this.setState({ desc })}
                         value={this.state.desc} />
 
@@ -56,7 +66,7 @@ export default class AddTasks extends Component {
                         <TouchableOpacity onPress={this.props.onCancel}>
                             <Text style={styles.button}>Cancelar</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => {}}>
+                        <TouchableOpacity onPress={this.save}>
                             <Text style={styles.button}>Salvar</Text>
                         </TouchableOpacity>
                     </View>
