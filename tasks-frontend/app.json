@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Blank Template",
-    "slug": "tasks-frontend",
+    "name": "Tasks",
+    "slug": "Tasks",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [

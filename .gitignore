@@ -1,0 +1,23 @@
+**/node_modules
+
+# backend
+.env
+*.log
+
+# frontend
+.expo/*
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+web-report/
+
+# projectCauculator
+calculator/**/*
+
+# macOS
+.DS_Store
