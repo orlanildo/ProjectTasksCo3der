@@ -36,7 +36,7 @@ export default class TaskList extends Component {
             showDoneTasks: savedState.showDoneTasks
         }, this.filterTasks)
 
-        this.loadTasks
+        this.loadTasks()
     }
 
     loadTasks = async () => {
@@ -70,9 +70,9 @@ export default class TaskList extends Component {
 
     toggleTask = async taskId => {
         try {
-            await axios.put(`${server}/tasks/${taskId}/toggle}`)
-            await this. loadTasks()
-        } catch (e) {
+            await axios.put(`${server}/tasks/${taskId}/toggle`)
+            this.loadTasks()
+        } catch(e) {
             showError(e)
         }
     }
@@ -150,9 +150,8 @@ export default class TaskList extends Component {
                 <View style={styles.taskList}>
                     <FlatList data={this.state.visibleTasks}
                         keyExtractor={item => `${item.id}`}
-                        renderItem={({item}) => <Task {...item} 
-                            onToggleTask={this.toggleTask} onDelete={this.deleteTask}
-                    /> } />
+                        renderItem={({item}) => <Task {...item} onToggleTask={this.toggleTask}
+                        onDelete={this.deleteTask} />} />
                 </View>
 
                 <TouchableOpacity style={[styles.addButton, { backgroundColor: this.getColor()}]} 

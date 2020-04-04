@@ -8,6 +8,20 @@ import 'moment/locale/pt-br'
 
 import commonStyles from '../commonStyles'
 
+function getCheckView(doneAt){
+    if(doneAt != null){
+        return (
+            <View style={styles.done}>
+                <Icon name='check' size={20} color='#fff' />
+            </View>
+        )
+    }else{
+        return (
+            <View style={styles.pending}></View>
+        )
+    }
+}
+
 export default props => {
     const doneOrNotStyle = props.doneAt != null ? 
         { textDecorationLine: 'line-through' } : {}
@@ -54,19 +68,6 @@ export default props => {
     )
 }
 
-function getCheckView(doneAt){
-    if(doneAt != null){
-        return (
-            <View style={styles.done}>
-                <Icon name='check' size={20} color='#fff' />
-            </View>
-        )
-    }else{
-        return (
-            <View style={styles.pending}></View>
-        )
-    }
-}
 
 const styles = StyleSheet.create({
     container:{

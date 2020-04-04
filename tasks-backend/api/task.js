@@ -15,7 +15,7 @@ module.exports = app => {
     }
 
     const save = (req, res) => {
-        if(!req.body.desc) return res.status(400).send('Descrição é u, campo obrigatorio')
+        if(!req.body.desc) return res.status(400).send('Descrição é um, campo obrigatorio')
 
         req.body.userId = req.user.id
         app.db('tasks')
