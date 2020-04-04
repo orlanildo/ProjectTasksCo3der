@@ -8,7 +8,6 @@ export default props => {
             <Icon name={props.icon} size={20} style={styles.icon} />
             <TextInput {...props} style={styles.input} />
         </View>        
-
     )
 }
 

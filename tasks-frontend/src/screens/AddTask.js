@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, Modal, View, StyleSheet, TouchableOpacity, 
-    TextInput, TouchableWithoutFeedback, Platform } from 'react-native'
+    TextInput, TouchableWithoutFeedback, Platform, Alert } from 'react-native'
 
 import moment from 'moment'
 
@@ -26,13 +26,19 @@ export default class AddTasks extends Component {
     }
 
     getDatePicker = () => {
-        let datePicker = <DateTimePicker value={this.state.date}
-            onChange={(_, date) => this.setState({ date, showDatePicker: false })} mode='date' />
+        let datePicker = ( 
+            <DateTimePicker mode='date' value={this.state.date}
+                onChange={(_, date) => {
+                    date = date ? date : new Date()
+                    this.setState({ date, showDatePicker: false })
+                }}  
+            /> 
+        )
 
-        const dateString = moment(this.state.date).format('ddd, D [de] MMM [de] YYYY')
+        const dateString = moment(this.state.date).format('ddd, D [de] MMMM [de] YYYY')
 
         if(Platform.OS == 'android'){
-            datePicker =(
+            datePicker = (
                 <View>
                     <TouchableOpacity onPress={() => this.setState({ showDatePicker: true })}>
                         <Text style={styles.date}>{dateString}</Text>

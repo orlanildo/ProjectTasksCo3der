@@ -14,8 +14,7 @@ export default props => {
 
     const date = props.doneAt ? props.doneAt : props.estimateAt
 
-    const formattedDate = moment(date).locale('pt-br')
-        .format('ddd, D [de] MMMM')
+    const formattedDate = moment(date).locale('pt-br').format('ddd, D [de] MMMM')
     
     const getRightContent = () => {
         return (
@@ -29,7 +28,7 @@ export default props => {
     const getLeftContent = () => {
         return (
             <View style={styles.left}>
-                <Icon name="trash" size={30} color="#fff" />
+                <Icon name="trash" size={20} color="#fff" style={styles.excludeIcon} />
                 <Text style={styles.excludeText}>Excluir</Text>
             </View>
         )
@@ -124,10 +123,13 @@ const styles = StyleSheet.create({
 
     left: {
         flex: 1,
-        paddingLeft: 10,
         backgroundColor: 'red',
         flexDirection: 'row',
         alignItems: 'center',
+    },
+
+    excludeIcon: {
+        marginLeft: 10,
     },
     
     excludeText: {

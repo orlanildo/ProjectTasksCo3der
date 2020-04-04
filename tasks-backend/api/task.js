@@ -15,7 +15,7 @@ module.exports = app => {
     }
 
     const save = (req, res) => {
-        if(!req.body.desc.trim()) res.status(400).send('Descrição é u, campo obrigatorio')
+        if(!req.body.desc) return res.status(400).send('Descrição é u, campo obrigatorio')
 
         req.body.userId = req.user.id
         app.db('tasks')
@@ -29,11 +29,11 @@ module.exports = app => {
             .where({ id: req.params.id, userId: req.user.id })
             .del()
             .then(rowsDeleted => {
-                if(rowsDeleted > 0) return res.status(204).send()
-
-                else{
-                    const menssagem = `Não foi encontrada tasks com ID: ${req.params.id}`
-                    res.status(400).send(menssagem)
+                if(rowsDeleted > 0){
+                    return res.status(204).send()
+                }else{
+                    const msg = `Não foi encontrada tasks com ID: ${req.params.id}`
+                    res.status(400).send(msg)
                 }
             })
             .catch(err => res.status(400).json(err))
@@ -53,8 +53,8 @@ module.exports = app => {
             .first()
             .then(task => {
                 if(!task){
-                     const menssagem = `Task com id ${req.params.id} não encontrada.`
-                     return res.status(400).send(menssagem)
+                     const msg = `Task com id ${req.params.id} não encontrada.`
+                     return res.status(400).send(msg)
                 }
 
                 const doneAt = task.doneAt ? null : new Date()

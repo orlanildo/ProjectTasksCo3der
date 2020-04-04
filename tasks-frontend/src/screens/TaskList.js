@@ -4,9 +4,8 @@ import { View, Text, ImageBackground, StyleSheet, FlatList, TouchableOpacity,
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 import axios from 'axios'    
-import momment from 'moment'
+import moment from 'moment'
 import 'moment/locale/pt-br'
-//import ActionButton from 'react-native-action-button'
 
 import {server, showError } from '../common'
 import commonStyles from '../commonStyles'
@@ -71,7 +70,7 @@ export default class TaskList extends Component {
 
     toggleTask = async taskId => {
         try {
-            await axios.put(`${server}/tasks/${taskId}/Toggle}`)
+            await axios.put(`${server}/tasks/${taskId}/toggle}`)
             await this. loadTasks()
         } catch (e) {
             showError(e)
@@ -85,8 +84,8 @@ export default class TaskList extends Component {
         }
 
         try {
-            await axios.post(`${server}/tasks`,{
-                desc: newTask,
+            await axios.post(`${server}/tasks`, {
+                desc: newTask.desc,
                 estimateAt: newTask.date
             })
 
@@ -96,7 +95,7 @@ export default class TaskList extends Component {
         }
     }
 
-    deleteTask = async id => {
+    deleteTask = async taskId => {
         try {
             await axios.delete(`${server}/tasks/${taskId}`)
             this.loadTasks()
@@ -124,7 +123,7 @@ export default class TaskList extends Component {
     }
 
     render(){
-        const today = momment().locale('pt-br').format('ddd, D [de] MMMM')
+        const today = moment().locale('pt-br').format('ddd, D [de] MMMM')
         return (
             <View style={styles.container}>
                 <AddTask isVisible={this.state.showAddTask}
@@ -152,7 +151,7 @@ export default class TaskList extends Component {
                     <FlatList data={this.state.visibleTasks}
                         keyExtractor={item => `${item.id}`}
                         renderItem={({item}) => <Task {...item} 
-                        onToggleTask={this.toggleTask} onDelete={this.deleteTask}
+                            onToggleTask={this.toggleTask} onDelete={this.deleteTask}
                     /> } />
                 </View>
 

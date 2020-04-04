@@ -3,7 +3,6 @@ import { ImageBackground, Text, StyleSheet, View,
     TouchableOpacity, Alert, AsyncStorage } from 'react-native'
 
 import axios from 'axios'
-//import AsyncStorage from '@react-native-community/async-storage'
 
 import backgroundImage from '../../assets/imgs/login.jpg'
 import commonStyles from '../commonStyles'
@@ -15,7 +14,7 @@ const initialState = {
     name: '',
     email: '',
     password: '',
-    confirmPassword: '123456',
+    confirmPassword: '',
     stageNew: false 
 }
 
@@ -31,15 +30,12 @@ export default class Auth extends Component {
                 password: this.state.password
             })
 
-            axios.defaults.headers.common['Authorization'] = `bearer ${res.data.token}`
             AsyncStorage.setItem('userData', JSON.stringify(res.data))
+            axios.defaults.headers.common['Authorization'] = `bearer ${res.data.token}`
             this.props.navigation.navigate('Home', res.data)
         } catch (err) {
-            //Alert.alert('Erro', 'Falha no Login!')
             showError(err)
         }
-       //this.props.navigation.navigate('Home')
-
     }
 
     signup = async () => {
@@ -51,8 +47,8 @@ export default class Auth extends Component {
                 confirmPassword: this.state.confirmPassword
             })
 
-            Alert.alert('Sucesso!', 'Usuário cadastrado :)')
-            this.setState({ stageNew: false })
+            showSuccess('Sucesso!', 'Usuário cadastrado!')
+            this.setState({ ...initialState })
         } catch (err) {
             showError(err)
         }
