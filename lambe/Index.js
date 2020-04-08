@@ -1,7 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-//import registerRootComponent from 'expo/build/launch/registerRootComponent';
-import registerRootComponent from './node_modules/expo/build/launch/registerRootComponent';
+import registerRootComponent from './node_modules/expo/build/launch/registerRootComponent'
 
 import storeConfig from './src/store/storeConfig'
 import Navigator from './src/Navigator';
