@@ -6,6 +6,9 @@ import { connect } from 'react-redux'
 import { addPost } from '../store/actions/posts'
 import * as ImagePicker from 'expo-image-picker'
 
+const noUser = 'Você precisa estar logado para adicionar imagens'
+
+
 class AddPhoto extends Component {
     state = {
         image: null,
@@ -13,6 +16,11 @@ class AddPhoto extends Component {
     }
 
     pickImage = async () => {
+        if(!this.props.name){
+             Alert.alert('Falha', noUser)
+             return
+        }
+
         if(await ImagePicker.requestCameraRollPermissionsAsync() === false){
             alert("Permission to access camera roll is required!")
             return;
@@ -26,6 +34,11 @@ class AddPhoto extends Component {
     }
 
     save = async () => {
+        if(!this.props.name){
+            Alert.alert('Falha!', noUser)
+            return
+        }
+
         this.props.onAddPost({
             id: Math.random(),
             nickname: this.props.name,
@@ -55,6 +68,7 @@ class AddPhoto extends Component {
 
                 <TextInput placeholder='Algum comentário para a fotot ?' 
                     onChangeText={comment => this.setState({ comment })}
+                    editable={this.props.name != null}
                     style={styles.input} value={this.state.comment}  />
         
                 <TouchableOpacity onPress={this.save} style={styles.buttom}>

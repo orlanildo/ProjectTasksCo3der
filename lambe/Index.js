@@ -5,6 +5,9 @@ import registerRootComponent from './node_modules/expo/build/launch/registerRoot
 import storeConfig from './src/store/storeConfig'
 import Navigator from './src/Navigator';
 
+import axios from  'axios'
+axios.defaults.baseURL = 'https://lambefirebase.firebaseio.com/'
+
 
 const store = storeConfig()
 
