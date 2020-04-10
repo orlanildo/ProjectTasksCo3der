@@ -4,9 +4,13 @@ import { connect } from 'react-redux'
 
 import Header from '../components/Header'
 import Post from '../components/Post'
-
+import { fetchPosts } from '../store/actions/posts'
 
 class Feed extends Component {
+    componentDidMount = () => {
+        this.props.onFetchPosts()
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -37,4 +41,10 @@ const mapStateToProps = ({ posts }) => {
     }
 }
 
-export default connect(mapStateToProps)(Feed)
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchPosts: () => dispatch(fetchPosts())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Feed)
