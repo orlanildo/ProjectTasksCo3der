@@ -6,7 +6,7 @@ import { login } from '../store/actions/user'
 
 class Login extends Component {
     state = {
-        name: 'Temporario',
+        name: '',
         email: '',
         password: ''
     }

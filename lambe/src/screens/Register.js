@@ -11,6 +11,14 @@ class Register extends Component{
         password: ''
     }
 
+    componentDidUpdate = prevProps => {
+        if(prevProps.isLoading && !this.props.isLoading) {
+            this.setState({ name: '', email: '', password: '' })
+
+            this.props.navigation.navigate('Feed')
+        }
+    }
+
     render(){
         return(
             <View style={styles.container}>
@@ -57,6 +65,13 @@ const styles = StyleSheet.create({
     }
 })
 
+
+const mapStateToProps = ({ user }) => {
+    return {
+        isLoading: user.isLoading
+    }
+}
+
 const mapDispatchToProsps = dispatch => {
     return {
         onCreateUser: user => dispatch(createUser(user))
@@ -64,4 +79,4 @@ const mapDispatchToProsps = dispatch => {
 }
 
 
-export default connect(null, mapDispatchToProsps)(Register)
+export default connect(mapStateToProps, mapDispatchToProsps)(Register)

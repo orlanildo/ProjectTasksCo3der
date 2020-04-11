@@ -6,6 +6,9 @@ import Header from '../components/Header'
 import Post from '../components/Post'
 import { fetchPosts } from '../store/actions/posts'
 
+import {YellowBox} from 'react-native';
+console.disableYellowBox = true;
+
 class Feed extends Component {
     componentDidMount = () => {
         this.props.onFetchPosts()

@@ -13,3 +13,5 @@ export const POST_CREATED = 'POST_CREATED'
 export const LOADING_USER = 'LOADING_USER'
 
 export const USER_LOADED = 'USER_LOADED'
+
+export const SET_MESSAGE = 'SET_MESSAGE'
