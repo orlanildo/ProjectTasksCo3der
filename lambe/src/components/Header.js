@@ -1,11 +1,23 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, Image } from 'react-native'
+import * as Font from 'expo-font'
+
 import iconImage from '../../assets/imgs/icon.png'
 import { connect } from 'react-redux'
 import { Gravatar } from 'react-native-gravatar'
 
 
 class Header extends Component {
+    state = { fontLoaded: false }
+
+    componentDidMount = async () => {
+        await Font.loadAsync({
+            'shelter': require('../../assets/fonts/shelter.otf')
+        })
+
+        this.setState({ fontLoaded: true })
+    }
+
     render(){
         const name = this.props.name || 'Anonymous'
         const  gravatar = this.props.email ?
@@ -15,7 +27,9 @@ class Header extends Component {
             <View style={styles.container}>
                 <View style={styles.rowContainer}>
                     <Image source={iconImage} style={styles.image} />
-                    <Text style={styles.title}>Lambe Lambe</Text>
+                    {this.state.fontLoaded ? (
+                        <Text style={styles.title}>Lambe Lambe</Text>
+                    ) : null }
                 </View>
 
                 <View style={styles.userContainer}>
@@ -49,7 +63,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#000',
-        //fontFamily: 'shelter',
+        fontFamily: 'shelter',
         height: 30,
         fontSize: 28
     },
